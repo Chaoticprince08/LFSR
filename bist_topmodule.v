@@ -1,6 +1,7 @@
 `timescale 1ns/1ps
 `include "bist_control_path.v"
 `include "bist_datapath.v"
+`include "slow_clock.v"
 module bist_topmodule (
     input clk,
     input rst,
