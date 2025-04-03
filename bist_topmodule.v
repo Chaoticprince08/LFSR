@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 `include "bist_control_path.v"
 `include "bist_datapath.v"
-`include "slow_clock.v"
+`include "clk_divider.v"
 module bist_topmodule (
     input clk,
     input rst,
@@ -12,9 +12,10 @@ module bist_topmodule (
 wire ring_counter_enable;
 wire johnson_counter_enable;
 wire lfsr_enable;
+wire slow_clk;
 
 bist_controlpath inst1(
-    .clk(clk), 
+    .clk(slow_clk), 
     .rst(rst), 
     .mode(mode), 
     .ring_counter_enable(ring_counter_enable),
@@ -23,7 +24,7 @@ bist_controlpath inst1(
     );
 
 bist_datapath inst2(
-    .clk(clk),
+    .clk(slow_clk),
     .rst(rst),
     .mode(mode),
     .ring_counter_enable(ring_counter_enable),
@@ -31,5 +32,7 @@ bist_datapath inst2(
     .lfsr_enable(lfsr_enable),
     .led(led)
 );
+
+clk_divider inst3(.clk(clk),rst(rst),.slow_clk(slow_clk));
     
 endmodule
