@@ -58,7 +58,7 @@ assign clk4 = clk & lfsr_enable;
 2. Design a and gate and feed the clk and enable signal to it and instantiate it in the respective counter
 3. Use a always block to assign the clk to the counter based on the enable signal as shown in the below code.
     At every change in clk, the clk is assigned to the counter based on the enable signal.
-    This is the most efficient way to do it as it does not require any extra gates and is easy to understand.
+    This is the most efficient way to do it as it is easy to understand.
 */
 always @(clk) begin
     if(ring_counter_enable) begin
