@@ -46,6 +46,20 @@ always @(rst or C2 or C3 or C4 or mode) begin
 end
 
 //Clock_Enable for each counter
+//The clock for each counter is enabled based on the enable signal
+//If the enable signal is high, the clock is passed to the counter, else it is not passed
+/*
+This can be enabled using three ways:
+1.
+assign clk2 = clk & ring_counter_enable;
+assign clk3 = clk & johnson_counter_enable;
+assign clk4 = clk & lfsr_enable;
+
+2. Design a end gate and feed the clk and enable signal to it and instantiate it in the respective counter
+3. Use a always block to assign the clk to the counter based on the enable signal as shown in the below code.
+    At every change in clk, the clk is assigned to the counter based on the enable signal.
+    This is the most efficient way to do it as it does not require any extra gates and is easy to understand.
+*/
 always @(clk) begin
     if(ring_counter_enable) begin
         clk2 <= clk;

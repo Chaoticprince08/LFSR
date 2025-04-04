@@ -23,20 +23,20 @@ initial begin
 end
 
 initial begin
-    $dumpfile("waveform.vcd");
-    $dumpvars;
+    //$dumpfile("waveform.vcd");
+    //$dumpvars;
     rst = 1'b1;
     #10;
     rst = 1'b0;
     #10
     mode = 2'b01;
-    #100
+    #1000000000;
     mode = 2'b10;
-    #100
+    #1000000000;
     mode = 2'b11;
-    #100;
+    #1000000000;
     mode = 2'b00;
-    #100 $finish;
+    #1000000000 $finish;
 end
 
 endmodule
